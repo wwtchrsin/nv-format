@@ -1,0 +1,50 @@
+{
+  "name": "nv-format",
+  "version": "1.0.0",
+  "description": "a tool for altering the string representation of a number",
+  "type": "commonjs",
+  "main": "./umd/nv-format.min.js",
+  "module": "./esm/nv-format.js",
+  "exports": {
+    ".": "./umd/nv-format.min.js",
+    "./umd/nv-format.min.js": "./umd/nv-format.min.js",
+    "./umd/nv-format.js": "./umd/nv-format.js",
+    "./esm": "./esm/nv-format.mjs",
+    "./esm/nv-format.js": "./esm/nv-format.mjs"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "build": "grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wwtchrsin/nv-format.git"
+  },
+  "keywords": [
+    "format",
+    "number",
+    "string",
+    "formatter",
+    "round",
+    "truncate",
+    "align",
+    "delimiter",
+    "commas"
+  ],
+  "author": "Vladislav Chursin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wwtchrsin/nv-format/issues"
+  },
+  "homepage": "https://github.com/wwtchrsin/nv-format#readme",
+  "devDependencies": {
+    "grunt": "^1.4.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-jshint": "^3.0.0",
+    "grunt-contrib-uglify": "^5.0.1",
+    "mocha": "^8.4.0"
+  }
+}

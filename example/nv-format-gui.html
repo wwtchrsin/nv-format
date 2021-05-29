@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>nv-format GUI</title>
+<!--<link rel="stylesheet" type="text/css" href="" media="all">-->
+<style type="text/css">
+@keyframes page-bg-anim {
+    0% { background-color: #5cd; }
+    20% { background-color: #5ec; }
+    100% { background-color: #db5; }
+}
+.no-text-selection {
+-webkit-touch-callout: none;
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+body {
+background-color: #5cd;
+font-family: monospace;
+animation-name: page-bg-anim;
+animation-duration: 5000ms;
+animation-timing-function: linear;
+animation-direction: alternate;
+animation-iteration-count: infinite;
+}
+#content {
+margin: 0 auto;
+padding: 20px 10px 10px 10px;
+width: 320px;
+}
+.main-header {
+font-size: 1.9em;
+text-align: center;
+color: #035;
+}
+.secondary-header {
+font-size: 1.2em;
+text-align: center;
+color: #057;
+}
+.row {
+margin: 20px 0;
+}
+.row .label {
+padding-left: 10px;
+float: left;
+width: 110px;
+color: #057;
+line-height: calc(1.2em + 16px);
+font-size: 1.2em;
+}
+.row .value,
+.row .options {
+float: left;
+width: 200px;
+}
+.row .options .option {
+cursor: pointer;
+display: inline-block;
+background-color: #fff2;
+width: 33%;
+border: 2px;
+border: 2px solid #079;
+padding: 5px 0;
+box-sizing: border-box;
+font-size: 1.2em;
+color: #057;
+text-align: center;
+}
+.row .options .trunc-option,
+.row .options .filler-option,
+.row .options .point-option,
+.row .options .delimiter-option {
+width: 33%;
+}
+.row .options .option:first-child {
+border-top-left-radius: 5px;
+border-bottom-left-radius: 5px;
+}
+.row .options .option:not(:first-child) {
+border-left-width: 0px;
+}
+.row .options .option:last-child {
+border-top-right-radius: 5px;
+border-bottom-right-radius: 5px;
+}
+.row .options .option.selected {
+background-color: #fff7;
+}
+.row .value input,
+.row .result-value {
+color: #057;
+border: 2px solid #079;
+padding: 5px 5px 5px 10px;
+box-sizing: border-box;
+font-size: 1.2em;
+font-family: monospace;
+border-radius: 5px;
+}
+.row .result-value {
+overflow: hidden;
+}
+.row .value input {
+background-color: #fff5;
+}
+.row .result-value {
+background-color: #fff5;
+height: calc(1.2em + 14px);
+}
+.row .value input {
+width: 100%;
+}
+.clear {
+clear: both;
+}
+.row .button {
+cursor: pointer;
+padding: 10px 20px;
+border-radius: 5px;
+color: #057;
+text-align: center;
+font-size: 1.2em;
+background-color: #fff3;
+}
+.row .value input:hover {
+background-color: #fff6;
+}
+.row .options .option:hover {
+background-color: #fff3;
+}
+.row .options .option.selected:hover {
+background-color: #fff8;
+}
+.row .button:hover {
+background-color: #fff4;
+}
+@media (max-width: 400px) {
+    #content {
+        width: 220px;
+    }
+    .main-header {
+        font-size: 1.4em;
+    }
+    .secondary-header {
+        font-size: 1em;
+    }
+    .table {
+        margin-top: 10px;
+    }
+    .row {
+    margin: 0;
+    }
+    .row .label,
+    .row .value,
+    .row .options {
+        float: none;
+        width: 100%;
+    }
+    .row .button {
+        margin: 20px 0;
+    }
+    
+}
+</style>
+</head>
+<body>
+    <div id="page">
+        <div id="content">
+        <div class="header">
+            <div class="main-header">nv-format.js</div>
+            <div class="secondary-header">GUI</div>
+        </div>
+        <div class="table">
+            <div class="row">
+                <div class="label">number:</div>
+                <div class="value"><input type="text" id="number-value" maxlength="18" value="123.45" /></div>
+                <div class="clear"></div>
+            </div>
+            <div class="row">
+                <div class="label">format:</div>
+                <div class="value"><input type="text" id="format-value" maxlength="18" value="+dddd.25" /></div>
+                <div class="clear"></div>
+            </div>
+            <div class="row">
+                <div class="label">trunc:</div>
+                <div class="options no-text-selection"><!--
+                    --><div class="option trunc-option selected">floor</div><!--
+                    --><div class="option trunc-option">round</div><!--
+                    --><div class="option trunc-option">ceil</div><!--
+                --></div>
+                <div class="clear"></div>
+            </div>
+            <div class="row">
+                <div class="label">filler:</div>
+                <div class="options no-text-selection"><!--
+                    --><div class="option filler-option selected">0</div><!--
+                    --><div class="option filler-option">space</div><!--
+                    --><div class="option filler-option">_</div><!--
+                --></div>
+                <div class="clear"></div>
+            </div>
+            <div class="row">
+                <div class="label">point:</div>
+                <div class="options no-text-selection"><!--
+                    --><div class="option point-option selected">udf</div><!--
+                    --><div class="option point-option">dot</div><!--
+                    --><div class="option point-option">comma</div><!--
+                --></div>
+                <div class="clear"></div>
+            </div>
+            <div class="row">
+                <div class="label">delimiter:</div>
+                <div class="options no-text-selection"><!--
+                    --><div class="option delimiter-option selected">no</div><!--
+                    --><div class="option delimiter-option">comma</div><!--
+                    --><div class="option delimiter-option">dot</div><!--
+                --></div>
+                <div class="clear"></div>
+            </div>
+            <div class="row">
+                <div class="label">result:</div>
+                <div class="value result-value"><span id="result-value"></span></div>
+                <div class="clear"></div>
+            </div>
+            <div class="row">
+                <div class="button no-text-selection">APPLY</div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../src/nv-format.min.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("DOMContentLoaded", function(ev) {
+            var $elem = document.querySelector.bind(document);
+            var $elems = document.querySelectorAll.bind(document);
+            var elems = {
+                format: $elem("#format-value"),
+                number: $elem("#number-value"),
+                button: $elem(".button"),
+                result: $elem("#result-value"),
+                options: {
+                    trunc: $elems(".trunc-option"),
+                    filler: $elems(".filler-option"),
+                    point: $elems(".point-option"),
+                    delimiter: $elems(".delimiter-option"),
+                },
+            };
+            var nameValueMap = {
+                "floor": "floor",
+                "round": "round",
+                "ceil": "ceil",
+                "0": "0",
+                "_": "_",
+                "space": " ",
+                "udf": "",
+                "dot": ".",
+                "comma": ",",
+                "rcomma": "r,",
+                "no": "",
+            };
+            var options = { trunc: "floor", };
+            var formatNumber = function(ev) {
+                for ( var type in elems.options ) {
+                    for ( var i=0; i < elems.options[type].length; i++ ) {
+                        if ( elems.options[type][i].classList.contains("selected") ) {
+                            var name = elems.options[type][i].textContent.toLowerCase();
+                            options[type] = nameValueMap[name];
+                        }
+                    }
+                }
+                var format = elems.format.value;
+                var number = elems.number.value;
+                var result = nvFormat(options)(number, format);
+                elems.result.textContent = result;
+            }
+            var switchOption = function(ev) {
+                var type = null;
+                if ( ev.target.classList.contains("trunc-option") ) {
+                    type = "trunc";
+                }
+                if ( ev.target.classList.contains("filler-option") ) {
+                    type = "filler";
+                }
+                if ( ev.target.classList.contains("point-option") ) {
+                    type = "point";
+                }
+                if ( ev.target.classList.contains("delimiter-option") ) {
+                    type = "delimiter";
+                }
+                if ( type === null ) return;
+                for ( var i=0; i < elems.options[type].length; i++ ) {
+                    elems.options[type][i].classList.remove("selected");
+                }
+                ev.target.classList.add("selected");
+            };
+            for ( var type in elems.options ) {
+                for ( var i=0; i < elems.options[type].length; i++ ) {
+                    elems.options[type][i].addEventListener("click", switchOption);
+                }
+            }
+            elems.button.addEventListener("click", formatNumber);
+            formatNumber();
+        });
+    </script>
+</body>
+</html>

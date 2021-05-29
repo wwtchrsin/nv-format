@@ -1,7 +1,7 @@
 {
   "name": "nv-format",
-  "version": "1.0.0",
-  "description": "a tool for altering the string representation of a number",
+  "version": "1.0.1",
+  "description": "A tool for defining a string representation of a number",
   "type": "commonjs",
   "main": "./umd/nv-format.min.js",
   "module": "./esm/nv-format.js",
